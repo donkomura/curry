@@ -1,7 +1,7 @@
 import System.Environment (getProgName)
 
-isCurryRiceProgram :: String -> Bool
-isCurryRiceProgram code = contains "Curry" code && contains "Rice" code
+isRiceCurryProgram :: String -> Bool
+isRiceCurryProgram code = contains "Rice" code && contains "Curry" code
 
 contains :: String -> String -> Bool
 contains [] _ = True
@@ -15,18 +15,18 @@ prefix [] _ = True
 prefix _ [] = False
 prefix (x:xs) (y:ys) = x == y && prefix xs ys
 
-swapCurryRice :: String -> String
-swapCurryRice [] = []
-swapCurryRice s@(x:xs)
-  | prefix "Rice" s = "Curry" ++ swapCurryRice (drop (length "Rice") s)
-  | prefix "Curry"  s = "Rice" ++ swapCurryRice (drop (length "Curry") s)
-  | otherwise        = [x] ++ swapCurryRice xs
+swapRiceCurry :: String -> String
+swapRiceCurry [] = []
+swapRiceCurry s@(x:xs)
+  | prefix "Curry" s = "Rice" ++ swapRiceCurry (drop (length "Curry") s)
+  | prefix "Rice"  s = "Curry" ++ swapRiceCurry (drop (length "Rice") s)
+  | otherwise        = [x] ++ swapRiceCurry xs
 
 main :: IO ()
 main = do
   progName <- getProgName
   let filename = progName ++ ".curry"
   content <- readFile filename
-  if isCurryRiceProgram content
-    then putStr (swapCurryRice content)
-    else putStrLn "Not a Curry-Rice program."
+  if isRiceCurryProgram content
+    then putStr (swapRiceCurry content)
+    else putStrLn "Not a Rice-Curry program."
