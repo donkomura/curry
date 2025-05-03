@@ -1,0 +1,12 @@
+{
+  "name": "curry",
+  "version": "0.0.1",
+  "author": "Kazuki Obata <koiru3822fs@gmail.com>",
+  "synopsis": "example programs written in curry programming language",
+  "category": [ "Programming" ],
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "dependencies": {
+    "runcurry": " >= 3.0.0,  < 4.0.0"
+  }
+}
